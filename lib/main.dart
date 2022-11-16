@@ -1,4 +1,5 @@
 import 'package:crowd/pages/login/login_controller.dart';
+import 'package:crowd/pages/splashscreen/splashcontroller.dart';
 import 'package:crowd/routes/route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => SplashController()),
         ChangeNotifierProvider(create: (context) => LoginController())
       ],
       child: GetMaterialApp(

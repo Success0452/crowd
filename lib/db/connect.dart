@@ -11,17 +11,12 @@ class MongoDatabase {
     print(status);
   }
 
-  static create(String collectionName) async {
-    var db = await Db.create(MONGO_URI);
-    await db.open();
-    db.collection(collectionName);
-  }
-
   static insert(Map<String, dynamic> object, String collectionName) async {
     var db = await Db.create(MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
-    collection.insertOne(object);
+    var result = collection.insertOne(object);
+    print(result);
   }
 
   static insertMany(
@@ -29,7 +24,8 @@ class MongoDatabase {
     var db = await Db.create(MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
-    collection.insertMany(object);
+    var result = collection.insertMany(object);
+    print(result);
   }
 
   static Future<Map<String, dynamic>?> retriveOne(

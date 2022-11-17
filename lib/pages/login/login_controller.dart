@@ -1,11 +1,14 @@
 import 'package:crowd/routes/route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:crowd/db/connect.dart';
-import 'package:crowd/model/user_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginController extends ChangeNotifier {
+  var InputPhoneNumber = TextEditingController();
+  var InputPassword = TextEditingController();
+
+  // connect login details
   var email = TextEditingController();
   var password = TextEditingController();
 

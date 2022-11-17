@@ -23,7 +23,8 @@ class RegisterController extends ChangeNotifier {
           "name": name.text,
           "email": email.text,
           "phone": phone.text,
-          "password": password.text
+          "password": password.text,
+          "point": 0
         }, "Users");
       } else {
         // notify user on the status of request

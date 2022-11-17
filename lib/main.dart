@@ -11,11 +11,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:crowd/db/connect.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
   await GetStorage.init();
+
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    permission = await Geolocator.requestPermission();
+  }
   runApp(const MyApp());
 }
 
@@ -37,7 +46,7 @@ class MyApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: RouteHelper.getOnboard(),
+        initialRoute: RouteHelper.getInitial(),
         getPages: RouteHelper.routes,
       ),
     );

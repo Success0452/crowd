@@ -7,6 +7,7 @@ class RegisterController extends ChangeNotifier {
   var email = TextEditingController();
   var phone = TextEditingController();
   var password = TextEditingController();
+  var confirmPassword = TextEditingController();
 
   // create user account
   createAccount() async {

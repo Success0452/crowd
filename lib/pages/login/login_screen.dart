@@ -45,15 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
               height: Dimensions.height30,
             ),
             AppTextField(
-                textEditingController:
-                    context.read<LoginController>().InputPhoneNumber,
-                hintText: "Enter Phone Number"),
+                textEditingController: context.read<LoginController>().email,
+                hintText: "Enter Email"),
             SizedBox(
               height: Dimensions.height20,
             ),
             AppTextField(
-                textEditingController:
-                    context.read<LoginController>().InputPassword,
+                textEditingController: context.read<LoginController>().password,
                 hintText: "Enter Password"),
             SizedBox(
               height: Dimensions.height10,

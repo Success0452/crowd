@@ -12,6 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:crowd/db/connect.dart';
 import 'package:geolocator/geolocator.dart';
+import 'helper/dependencies.dart' as dependency;
 
 void main() async {
   bool serviceEnabled;
@@ -20,6 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
   await GetStorage.init();
+  await dependency.init();
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {

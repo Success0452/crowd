@@ -23,6 +23,8 @@ dependencies:
   mongo_dart: ^0.8.0
   intl: ^0.17.0
   geolocator: ^9.0.2
+  google_maps_flutter: ^2.2.0
+  geocoding: ^2.0.5
 
   cupertino_icons: ^1.0.2
 
@@ -40,7 +42,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images
-    - assets/svg
+    - assets/images/
+    - assets/svg/
 
 

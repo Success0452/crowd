@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:crowd/util/constant.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:crowd/util/constant.dart';
 
 class MongoDatabase {
   static connect() async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     inspect(db);
     var status = db.serverStatus();
@@ -12,7 +12,7 @@ class MongoDatabase {
   }
 
   static insert(Map<String, dynamic> object, String collectionName) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     var result = collection.insertOne(object);
@@ -21,7 +21,7 @@ class MongoDatabase {
 
   static insertMany(
       String collectionName, List<Map<String, dynamic>> object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     var result = collection.insertMany(object);
@@ -30,7 +30,7 @@ class MongoDatabase {
 
   static Future<Map<String, dynamic>?> retriveOne(
       String collectionName, Object object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     var result = collection.findOne(object);
@@ -40,7 +40,7 @@ class MongoDatabase {
 
   static Future<List<Map<String, dynamic>>> retrieveMany(
       String collectionName, Object object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     var result = collection.find(object);
@@ -50,7 +50,7 @@ class MongoDatabase {
 
   static updateOne(
       String collectionName, Object selectObject, Object object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     collection.updateOne(selectObject, object);
@@ -59,7 +59,7 @@ class MongoDatabase {
 
   static updateMany(
       String collectionName, Object selectObject, Object object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     collection.updateMany(selectObject, object);
@@ -67,7 +67,7 @@ class MongoDatabase {
   }
 
   static deleteOne(String collectionName, Object object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     collection.deleteOne(object);
@@ -75,7 +75,7 @@ class MongoDatabase {
   }
 
   static deleteMany(String collectionName, Object object) async {
-    var db = await Db.create(MONGO_URI);
+    var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
     collection.deleteMany(object);

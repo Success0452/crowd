@@ -29,7 +29,7 @@ class MongoDatabase {
   }
 
   static Future<Map<String, dynamic>?> retriveOne(
-      String collectionName, Object object) async {
+      String collectionName, Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
@@ -39,7 +39,7 @@ class MongoDatabase {
   }
 
   static Future<List<Map<String, dynamic>>> retrieveMany(
-      String collectionName, Object object) async {
+      String collectionName, Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
@@ -48,8 +48,8 @@ class MongoDatabase {
     return result.toList();
   }
 
-  static updateOne(
-      String collectionName, Object selectObject, Object object) async {
+  static updateOne(String collectionName, Map<String, dynamic> selectObject,
+      Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
@@ -57,8 +57,8 @@ class MongoDatabase {
     print("updated");
   }
 
-  static updateMany(
-      String collectionName, Object selectObject, Object object) async {
+  static updateMany(String collectionName, Map<String, dynamic> selectObject,
+      Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
@@ -66,7 +66,7 @@ class MongoDatabase {
     print("updated many");
   }
 
-  static deleteOne(String collectionName, Object object) async {
+  static deleteOne(String collectionName, Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);
@@ -74,7 +74,7 @@ class MongoDatabase {
     print("deleted");
   }
 
-  static deleteMany(String collectionName, Object object) async {
+  static deleteMany(String collectionName, Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);
     await db.open();
     var collection = db.collection(collectionName);

@@ -6,12 +6,14 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final Icon? preFixIcon;
   final Icon? suffixIcon;
+  final bool? obscure;
 
   const AppTextField(
       {Key? key,
       required this.textEditingController,
       required this.hintText,
       this.preFixIcon,
+      this.obscure,
       this.suffixIcon})
       : super(key: key);
 
@@ -32,6 +34,7 @@ class AppTextField extends StatelessWidget {
             ]),
         child: TextField(
           controller: textEditingController,
+          obscureText: obscure == null ? false : obscure!,
           decoration: InputDecoration(
             hintText: hintText,
             prefix: preFixIcon,

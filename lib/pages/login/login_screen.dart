@@ -51,8 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
               height: Dimensions.height20,
             ),
             AppTextField(
-                textEditingController: context.read<LoginController>().password,
-                hintText: "Enter Password"),
+              textEditingController: context.read<LoginController>().password,
+              hintText: "Enter Password",
+              obscure: true,
+            ),
             SizedBox(
               height: Dimensions.height10,
             ),

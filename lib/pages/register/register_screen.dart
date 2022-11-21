@@ -64,16 +64,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: Dimensions.height20,
             ),
             AppTextField(
-                textEditingController:
-                    context.read<RegisterController>().password,
-                hintText: "Password"),
+              textEditingController:
+                  context.read<RegisterController>().password,
+              hintText: "Password",
+              obscure: true,
+            ),
             SizedBox(
               height: Dimensions.height20,
             ),
             AppTextField(
                 textEditingController:
                     context.read<RegisterController>().confirmPassword,
-                hintText: "Confirm Password"),
+                hintText: "Confirm Password",
+                obscure: true),
             SizedBox(
               height: Dimensions.height10,
             ),
@@ -90,13 +93,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         size: Dimensions.icon16,
                       )),
                       TextSpan(
-                          text: "agree to this terms and condition",
+                          text: " i agree to the",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: Dimensions.font15)),
                       TextSpan(
-                          text:
-                              "i agree to this term and condition of the company",
+                          text: " terms and condition",
                           style: TextStyle(
                               color: Colors.blue, fontSize: Dimensions.font15))
                     ])),

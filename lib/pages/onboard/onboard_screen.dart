@@ -22,10 +22,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            "assets/svg/onboard1.svg",
-            height: Dimensions.height40 * 8,
-            width: Dimensions.width40 * 8,
-            fit: BoxFit.contain,
+            "assets/svg/onboard.svg",
+            height: Dimensions.height40 * 5,
+            width: Dimensions.width40 * 2,
+            fit: BoxFit.cover,
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -33,23 +33,19 @@ class _OnboardScreenState extends State<OnboardScreen> {
           RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                  text: "CrowdSourcing",
+                  text: "Emergency",
                   style: TextStyle(
                       color: Colors.blue, fontSize: Dimensions.font20),
                   children: const [
                     TextSpan(
-                        text: " Emergency ",
+                        text: " CrowdSourcing ",
                         style: TextStyle(color: Colors.black)),
-                    TextSpan(text: "To", style: TextStyle(color: Colors.blue)),
-                    TextSpan(
-                        text: "Notify", style: TextStyle(color: Colors.blue))
                   ])),
           SizedBox(
-            height: Dimensions.height20,
+            height: Dimensions.height10,
           ),
           SmallText(
-            text:
-                "Crowdsouring to notify our users about the most immediate emergency",
+            text: "Notify our users about the most immediate emergency",
             color: Colors.black,
           ),
           SizedBox(

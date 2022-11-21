@@ -45,10 +45,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Location"),
-        backgroundColor: Colors.black,
-      ),
       backgroundColor: Colors.grey.shade300,
       body: GetBuilder<LocationController>(
         builder: (locationController) {
@@ -91,23 +87,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SizedBox(
                 height: Dimensions.height20,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: Dimensions.width20),
-                child: BigText(
-                  text: 'Delivery Address',
-                ),
-              ),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-              AppTextField(
-                textEditingController: _address,
-                hintText: "Your Address",
-                preFixIcon: const Icon(
-                  Icons.map,
-                  color: Colors.black,
-                ),
-              )
             ],
           );
         },

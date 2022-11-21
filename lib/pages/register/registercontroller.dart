@@ -15,9 +15,15 @@ class RegisterController extends ChangeNotifier {
     if (name.text.isNotEmpty &&
         email.text.isNotEmpty &&
         phone.text.isNotEmpty &&
-        password.text.isNotEmpty) {
+        password.text.isNotEmpty &&
+        confirmPassword.text.isNotEmpty) {
       // invoke the function to save user details
-      var check = await MongoDatabase.retriveOne("Users", {email: email.text});
+      if (password.text != confirmPassword.text) {
+        return Get.snackbar("info", "password does not match",
+            duration: const Duration(milliseconds: 1000));
+      }
+      var check =
+          await MongoDatabase.retriveOne("Users", {"email": email.text});
       // check whether any info was received
       if (check == null) {
         await MongoDatabase.insert({
@@ -27,15 +33,26 @@ class RegisterController extends ChangeNotifier {
           "password": password.text,
           "point": 0
         }, "Users");
+        reset();
+        Get.snackbar("info", "registration successful, you can now login",
+            duration: const Duration(milliseconds: 1000));
       } else {
         // notify user on the status of request
         Get.snackbar("info", "email already a user",
-            duration: const Duration(milliseconds: 500));
+            duration: const Duration(milliseconds: 1000));
       }
     } else {
       // notify user on the status of request
       Get.snackbar("info", "all parameters are required",
-          duration: const Duration(milliseconds: 500));
+          duration: const Duration(milliseconds: 1000));
     }
+  }
+
+  reset() {
+    name.text = '';
+    email.text = '';
+    phone.text = '';
+    password.text = '';
+    confirmPassword.text = '';
   }
 }

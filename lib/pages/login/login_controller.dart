@@ -14,25 +14,27 @@ class LoginController extends ChangeNotifier {
     // ensure the textInputs are not empty
     if (email.text.isNotEmpty && password.text.isNotEmpty) {
       // invoke the function to retrieve user details
-      var check = await MongoDatabase.retriveOne("Users", {email: email.text});
+      var check = await MongoDatabase.retriveOne(
+          "Users", {"email": email.text, "password": password.text});
       // check whether any info was received
       if (check != null) {
         // save user email and password
-        GetStorage().write("email", email);
-        GetStorage().write("password", password);
+        GetStorage().write("email", email.text);
+        GetStorage().write("password", password.text);
 
+        Get.offAllNamed(RouteHelper.getDashboard());
         // notify user on the status of request
         Get.snackbar("info", "login success",
-            duration: const Duration(milliseconds: 500));
+            duration: const Duration(milliseconds: 1000));
       } else {
         // notify user on the status of request
-        Get.snackbar("info", "user not available, try creating account",
-            duration: const Duration(milliseconds: 500));
+        Get.snackbar("info", "email or password is incorrect",
+            duration: const Duration(milliseconds: 1000));
       }
     } else {
       // notify user on the status of request
       Get.snackbar("info", "all parameters are required",
-          duration: const Duration(milliseconds: 500));
+          duration: const Duration(milliseconds: 1000));
     }
   }
 

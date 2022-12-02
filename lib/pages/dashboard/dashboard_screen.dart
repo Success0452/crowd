@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:crowd/util/dimensions.dart';
 import 'package:crowd/widget/textfield_widget.dart';
 import 'package:crowd/widget/big_text.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:crowd/pages/dashboard/model/location_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -18,15 +19,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _contactPersonName = TextEditingController();
   final _contactPersonNumber = TextEditingController();
   bool? isLoggedIn;
+  LatLng? _position;
+  CameraPosition? _cameraPosition;
 
-  CameraPosition _cameraPosition =
-      const CameraPosition(target: LatLng(45.51563, -122.677433), zoom: 17);
-  late LatLng _initialPosition = const LatLng(45.51563, -122.677433);
+  getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+
+    LatLng location = LatLng(lat, long);
+
+    setState(() {
+      _position = location;
+    });
+  }
+
+  late LatLng _initialPosition = _position!;
 
   @override
   void initState() {
     super.initState();
+    getLocation();
     if (Get.find<LocationController>().addressList.isNotEmpty) {
+      _cameraPosition = CameraPosition(target: _position!, zoom: 17);
       _cameraPosition = CameraPosition(
           target: LatLng(
               double.parse(
@@ -52,42 +68,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
               '${locationController.placeMark.locality ?? ''}'
               '${locationController.placeMark.postalCode ?? ''}'
               '${locationController.placeMark.country ?? ''}';
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                height: 140,
-                width: width,
-                margin: const EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(width: 2, color: Colors.black54)),
-                child: Stack(
-                  children: [
-                    GoogleMap(
-                      initialCameraPosition:
-                          CameraPosition(target: _initialPosition, zoom: 17),
-                      zoomControlsEnabled: false,
-                      compassEnabled: false,
-                      indoorViewEnabled: true,
-                      mapToolbarEnabled: false,
-                      onCameraMove: ((position) => _cameraPosition = position),
-                      onMapCreated: (GoogleMapController mapController) {
-                        locationController.setGoogleController(mapController);
-                      },
-                      onCameraIdle: () {
-                        locationController.updatePosition(
-                            _cameraPosition, true);
-                      },
-                    )
-                  ],
+          return SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  width: width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(width: 0, color: Colors.transparent)),
+                  child: Stack(
+                    children: [
+                      GoogleMap(
+                        initialCameraPosition:
+                            CameraPosition(target: _initialPosition, zoom: 17),
+                        zoomControlsEnabled: false,
+                        compassEnabled: false,
+                        indoorViewEnabled: true,
+                        mapToolbarEnabled: false,
+                        onCameraMove: ((position) =>
+                            _cameraPosition = position),
+                        onMapCreated: (GoogleMapController mapController) {
+                          locationController.setGoogleController(mapController);
+                        },
+                        onCameraIdle: () {
+                          locationController.updatePosition(
+                              _cameraPosition!, true);
+                        },
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-            ],
+                SizedBox(
+                  height: Dimensions.height20,
+                ),
+              ],
+            ),
           );
         },
       ),

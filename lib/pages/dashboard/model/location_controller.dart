@@ -10,6 +10,7 @@ class LocationController extends GetxController implements GetxService {
   LocationController({required this.locationRepo});
 
   // private setter variables
+  LatLng? _currentPosition;
 
   // track position of the map
   late Position _position;
@@ -104,6 +105,17 @@ class LocationController extends GetxController implements GetxService {
       print("error getting the google api");
     }
     return _address;
+  }
+
+  getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+
+    LatLng location = LatLng(lat, long);
+
+    _currentPosition = location;
   }
 
   void updateUiAddress() {}

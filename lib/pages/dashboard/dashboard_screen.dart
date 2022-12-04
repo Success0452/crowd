@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:crowd/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:crowd/util/dimensions.dart';
@@ -20,7 +23,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _contactPersonNumber = TextEditingController();
   bool? isLoggedIn;
   LatLng? _position;
-  CameraPosition? _cameraPosition;
 
   getLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -35,12 +37,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     });
   }
 
-  late LatLng _initialPosition = _position!;
+  CameraPosition _cameraPosition =
+      const CameraPosition(target: LatLng(45.51563, -122.677433), zoom: 17);
+  late LatLng _initialPosition = const LatLng(45.51563, -122.677433);
 
   @override
   void initState() {
     super.initState();
     getLocation();
+    print(_position);
     if (Get.find<LocationController>().addressList.isNotEmpty) {
       _cameraPosition = CameraPosition(target: _position!, zoom: 17);
       _cameraPosition = CameraPosition(
@@ -61,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.white,
       body: GetBuilder<LocationController>(
         builder: (locationController) {
           _address.text = '${locationController.placeMark.name ?? ''} '
@@ -70,11 +75,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
               '${locationController.placeMark.country ?? ''}';
           return SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Hello Mojisola",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "You are logged in",
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
                 Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
+                  height: MediaQuery.of(context).size.height / 1.20,
                   width: width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -95,7 +120,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         },
                         onCameraIdle: () {
                           locationController.updatePosition(
-                              _cameraPosition!, true);
+                              _cameraPosition, true);
                         },
                       )
                     ],

@@ -31,6 +31,7 @@ class ButtonWidget extends StatelessWidget {
           onPressed: pressed,
           child: Text(
             text,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
               fontSize: Dimensions.font15,

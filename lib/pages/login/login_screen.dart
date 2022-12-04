@@ -88,19 +88,32 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: Dimensions.height40,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ButtonWidget(
-                  text: "Login",
-                  color: Colors.blue,
-                  width: Dimensions.width40 * 12,
-                  height: Dimensions.height40 * 1.3,
-                  pressed: () => context.read<LoginController>().loginAccount(),
-                ),
-              ],
-            ),
+            ValueListenableBuilder(
+                valueListenable: context.read<LoginController>().loadstate,
+                builder: (context, ref, child) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ref == false
+                          ? ButtonWidget(
+                              text: "Login",
+                              color: Colors.blue,
+                              width: Dimensions.width40 * 12,
+                              height: Dimensions.height40 * 1.3,
+                              pressed: () => context
+                                  .read<LoginController>()
+                                  .loginAccount(),
+                            )
+                          : Container(
+                              width: 40,
+                              height: 40,
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 6,
+                              ))
+                    ],
+                  );
+                }),
             SizedBox(
               height: Dimensions.height30,
             ),

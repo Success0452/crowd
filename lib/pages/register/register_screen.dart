@@ -107,20 +107,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(
               height: Dimensions.height40,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ButtonWidget(
-                  text: "Sign Up",
-                  color: Colors.black,
-                  width: Dimensions.width40 * 12,
-                  height: Dimensions.height40 * 1.3,
-                  pressed: () =>
-                      context.read<RegisterController>().createAccount(),
-                ),
-              ],
-            ),
+            ValueListenableBuilder(
+                valueListenable: context.read<RegisterController>().loadstate,
+                builder: (context, ref, child) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ref == false
+                          ? ButtonWidget(
+                              text: "Sign Up",
+                              color: Colors.black,
+                              width: Dimensions.width40 * 12,
+                              height: Dimensions.height40 * 1.3,
+                              pressed: () => context
+                                  .read<RegisterController>()
+                                  .createAccount(),
+                            )
+                          : Container(
+                              width: 50,
+                              height: 50,
+                              child: const CircularProgressIndicator())
+                    ],
+                  );
+                })
           ],
         ),
       ),

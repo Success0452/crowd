@@ -3,6 +3,8 @@ import 'package:crowd/db/connect.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends ChangeNotifier {
+  var loadstate = ValueNotifier(false);
+
   var name = TextEditingController();
   var email = TextEditingController();
   var phone = TextEditingController();
@@ -17,8 +19,10 @@ class RegisterController extends ChangeNotifier {
         phone.text.isNotEmpty &&
         password.text.isNotEmpty &&
         confirmPassword.text.isNotEmpty) {
+      loadstate.value = true;
       // invoke the function to save user details
       if (password.text != confirmPassword.text) {
+        loadstate.value = false;
         return Get.snackbar("info", "password does not match",
             duration: const Duration(milliseconds: 1000));
       }
@@ -36,15 +40,18 @@ class RegisterController extends ChangeNotifier {
         reset();
         Get.snackbar("info", "registration successful, you can now login",
             duration: const Duration(milliseconds: 1000));
+        loadstate.value = false;
       } else {
         // notify user on the status of request
         Get.snackbar("info", "email already a user",
             duration: const Duration(milliseconds: 1000));
+        loadstate.value = false;
       }
     } else {
       // notify user on the status of request
       Get.snackbar("info", "all parameters are required",
           duration: const Duration(milliseconds: 1000));
+      loadstate.value = false;
     }
   }
 

@@ -5,6 +5,7 @@ import 'package:crowd/pages/onboard/onboard_screen.dart';
 import 'package:crowd/pages/profile/profile_screen.dart';
 import 'package:crowd/pages/register/register_screen.dart';
 import 'package:crowd/pages/reporting/report_screen.dart';
+import 'package:crowd/pages/source.dart';
 import 'package:crowd/pages/splashscreen/splashscreen.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +39,7 @@ class RouteHelper {
         transition: Transition.fade),
     GetPage(
         name: dashboard,
-        page: () => const DashboardScreen(),
+        page: () => const Source(),
         transition: Transition.fadeIn),
     GetPage(
         name: login,

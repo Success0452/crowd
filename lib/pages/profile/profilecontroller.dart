@@ -4,6 +4,7 @@ import 'package:crowd/db/connect.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ProfileController extends ChangeNotifier {
+  var loadstate = ValueNotifier(false);
   String? email;
   String? name;
   String? phone;

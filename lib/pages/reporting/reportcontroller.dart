@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class ReportController extends ChangeNotifier {
   var description = TextEditingController();
@@ -47,5 +48,10 @@ class ReportController extends ChangeNotifier {
         "description": description.text
       }, "Emergencies");
     }
+  }
+
+  notifyUser() async {
+    // implelement notifying users here
+    // http.Client().post(Uri(), { "": ""});
   }
 }

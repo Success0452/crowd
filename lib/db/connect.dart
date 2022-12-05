@@ -48,6 +48,16 @@ class MongoDatabase {
     return result.toList();
   }
 
+  static Future<List<Map<String, dynamic>>> retrieveAll(
+      String collectionName) async {
+    var db = await Db.create(AppConstant.MONGO_URI);
+    await db.open();
+    var collection = db.collection(collectionName);
+    var result = collection.find();
+    print(result);
+    return result.toList();
+  }
+
   static updateOne(String collectionName, Map<String, dynamic> selectObject,
       Map<String, dynamic> object) async {
     var db = await Db.create(AppConstant.MONGO_URI);

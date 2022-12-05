@@ -140,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   CrossAxisAlignment.start,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: [
+                                              children: const [
                                                 Text(
                                                   "User Name",
                                                   style: TextStyle(
@@ -163,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ],
                                             ),
                                           ),
-                                          Icon(
+                                          const Icon(
                                             Icons.email,
                                             color: Colors.black,
                                           )
@@ -184,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 CrossAxisAlignment.start,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
-                                            children: [
+                                            children: const [
                                               Text(
                                                 "User ID",
                                                 style: TextStyle(
@@ -204,10 +204,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 50,
                                           ),
-                                          Icon(
+                                          const Icon(
                                             Icons.perm_identity,
                                             color: Colors.black,
                                           )
@@ -231,7 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   CrossAxisAlignment.start,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: [
+                                              children: const [
                                                 Text(
                                                   "User Email",
                                                   style: TextStyle(
@@ -254,7 +254,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ],
                                             ),
                                           ),
-                                          Icon(
+                                          const Icon(
                                             Icons.email,
                                             color: Colors.black,
                                           )
@@ -275,20 +275,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 CrossAxisAlignment.start,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
-                                            children: [
-                                              const Text(
+                                            children: const [
+                                              Text(
                                                 "User Address",
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20),
                                               ),
-                                              const SizedBox(
+                                              SizedBox(
                                                 height: 5,
                                               ),
                                               Text(
                                                 "At the first instance",
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                     color: Colors.grey,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
@@ -319,20 +319,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 CrossAxisAlignment.start,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
-                                            children: [
-                                              const Text(
+                                            children: const [
+                                              Text(
                                                 "Phone Number",
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20),
                                               ),
-                                              const SizedBox(
+                                              SizedBox(
                                                 height: 5,
                                               ),
                                               Text(
                                                 "08147330326",
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                     color: Colors.grey,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),

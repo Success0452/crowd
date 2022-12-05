@@ -2,7 +2,7 @@ import 'package:crowd/util/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
   final String hintText;
   final Icon? preFixIcon;
   final Icon? suffixIcon;
@@ -10,7 +10,7 @@ class AppTextField extends StatelessWidget {
 
   const AppTextField(
       {Key? key,
-      required this.textEditingController,
+      this.textEditingController,
       required this.hintText,
       this.preFixIcon,
       this.obscure,

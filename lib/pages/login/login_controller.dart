@@ -23,11 +23,14 @@ class LoginController extends ChangeNotifier {
         // save user email and password
         GetStorage().write("email", email.text);
         GetStorage().write("password", password.text);
+        print(check['name']);
+        GetStorage().write("name", check['name']);
 
         Get.offAllNamed(RouteHelper.getDashboard());
         // notify user on the status of request
         Get.snackbar("info", "login success",
             duration: const Duration(milliseconds: 1000));
+        clear();
         loadstate.value = false;
       } else {
         // notify user on the status of request
@@ -41,6 +44,11 @@ class LoginController extends ChangeNotifier {
           duration: const Duration(milliseconds: 1000));
       loadstate.value = false;
     }
+  }
+
+  clear (){
+    email.text = '';
+    password.text = '';
   }
 
   logout() async {

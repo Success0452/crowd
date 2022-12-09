@@ -1,8 +1,10 @@
+import 'package:crowd/pages/reporting/reportcontroller.dart';
 import 'package:crowd/routes/route.dart';
 import 'package:crowd/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:crowd/widget/custom_text_field.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({Key? key}) : super(key: key);
@@ -67,47 +69,6 @@ class _ReportScreenState extends State<ReportScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: width / 13,
-                    height: width / 13,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.transparent,
-                        border: Border.all(color: Colors.black)),
-                    child: Center(
-                      child: Icon(
-                        Icons.arrow_back_outlined,
-                        color: Colors.black,
-                        size: width / 16,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(top: width / 35, bottom: width / 25),
-                    child: Text(
-                      "Report",
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(color: Colors.black, fontSize: width / 18),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.only(top: width / 35, bottom: width / 25),
-                    child: Text(
-                      "Repot",
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(color: Colors.black, fontSize: width / 28),
-                    ),
-                  )
-                ],
-              ),
               SizedBox(
                 width: width,
                 child: Column(
@@ -121,7 +82,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "Report",
+                            "Report Title",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: width / 24,
@@ -131,7 +92,35 @@ class _ReportScreenState extends State<ReportScreen> {
                             height: height / 80,
                           ),
                           CustomTextField(
-                              hintText: "SEcond",
+                            controller: context.read<ReportController>().title,
+                              hintText: "specify title of the report",
+                              textInputType: TextInputType.text,
+                              textInputAction: TextInputAction.next,
+                              backgroundColor: Colors.transparent,
+                              obscureText: false)
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: height / 26),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Report Warning",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: width / 24,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: height / 80,
+                          ),
+                          CustomTextField(
+                              controller: context.read<ReportController>().warning,
+                              height: 80,
+                              hintText: "specify what to avoid",
                               textInputType: TextInputType.text,
                               textInputAction: TextInputAction.next,
                               backgroundColor: Colors.transparent,
@@ -156,32 +145,9 @@ class _ReportScreenState extends State<ReportScreen> {
                             height: height / 80,
                           ),
                           CustomTextField(
-                              hintText: "third",
-                              textInputType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              backgroundColor: Colors.transparent,
-                              obscureText: false)
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(bottom: height / 26),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Report",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: width / 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: height / 80,
-                          ),
-                          const CustomTextField(
-                              hintText: "1200",
+                              controller: context.read<ReportController>().description,
+                              height: 200,
+                              hintText: "specify description of the report",
                               textInputType: TextInputType.text,
                               textInputAction: TextInputAction.next,
                               backgroundColor: Colors.transparent,
@@ -196,19 +162,33 @@ class _ReportScreenState extends State<ReportScreen> {
           ),
         ),
       )),
-      bottomSheet: GestureDetector(
-          onTap: () => Get.toNamed(RouteHelper.getInfo()),
-          child: Padding(
-            padding: EdgeInsets.only(bottom: width / 30),
+      bottomSheet:
+      GestureDetector(
+          onTap: () {
+            if(context.read<ReportController>().title.text.isNotEmpty &&
+                context.read<ReportController>().warning.text.isNotEmpty &&
+                context.read<ReportController>().description.text.isNotEmpty)
+            {
+              context.read<ReportController>().saveEmergencies();
+            }else{
+              Get.snackbar("info", "all fields are required", duration: const Duration(milliseconds: 1500));
+            }
+
+          },
+          child: Container(
+            color: Colors.grey.shade300,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ButtonWidget(
-                    color: Colors.blue,
-                    height: height / 15,
-                    width: width / 1.2,
-                    text: "Continue")
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0),
+                  child: ButtonWidget(
+                      color: Colors.blue,
+                      height: height / 15,
+                      width: width / 2,
+                      text: "Notify"),
+                )
               ],
             ),
           )),

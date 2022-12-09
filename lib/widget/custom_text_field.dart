@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
       required this.backgroundColor,
       this.prefixIcon,
       this.suffixIcon,
+      this.height,
       required this.obscureText})
       : super(key: key);
 
@@ -21,11 +22,12 @@ class CustomTextField extends StatelessWidget {
   final Icon? prefixIcon;
   final Icon? suffixIcon;
   final bool? obscureText;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 15,
+      height: height ?? MediaQuery.of(context).size.height / 15,
       decoration: BoxDecoration(
           color: Colors.grey[200],
           border: Border.all(width: 1.0, color: backgroundColor),

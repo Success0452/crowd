@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:crowd/db/connect.dart';
 import 'package:geolocator/geolocator.dart';
 import 'helper/dependencies.dart' as dependency;
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   bool serviceEnabled;
@@ -22,6 +23,9 @@ void main() async {
   await MongoDatabase.connect();
   await GetStorage.init();
   await dependency.init();
+
+  OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
+  OneSignal.shared.setAppId("d88d9cbb-e948-407b-b357-0bbf9a43450e");
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {

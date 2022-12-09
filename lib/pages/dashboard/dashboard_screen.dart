@@ -8,7 +8,9 @@ import 'package:crowd/widget/textfield_widget.dart';
 import 'package:crowd/widget/big_text.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:crowd/pages/dashboard/model/location_controller.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -38,8 +40,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   CameraPosition _cameraPosition =
-      const CameraPosition(target: LatLng(45.51563, -122.677433), zoom: 17);
-  late LatLng _initialPosition = const LatLng(45.51563, -122.677433);
+      const CameraPosition(target: LatLng(7.80093675, 5.31859625), zoom: 17);
+  late LatLng _initialPosition = const LatLng(7.80093675, 5.31859625);
 
   @override
   void initState() {
@@ -81,9 +83,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      "Hello Mojisola",
+                      "Hello ${GetStorage().read("name")}",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
